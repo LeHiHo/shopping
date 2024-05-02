@@ -3,11 +3,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ProductsSearchAction } from "@/app/main/action";
+import { promises } from "dns";
 
 const LoginPage = () => {
   const [keyword, setKeyword] = useState<string>("");
   const router = useRouter();
-  const [items, setItems] = useState<any>();
+  const [items, setItems] = useState<ProductSearchResult[]>([]);
 
   return (
     <>
@@ -16,14 +17,14 @@ const LoginPage = () => {
           try {
             const result = await ProductsSearchAction(keyword);
             if (result?.data) {
-              let combinedItems = [];
+              let combinedItems: ProductSearchResult[] = [];
               if (result.data.coupang) {
                 combinedItems = combinedItems.concat(result.data.coupang);
               }
               if (result.data.ali) {
                 combinedItems = combinedItems.concat(result.data.ali);
               }
-              setItems(combinedItems); // "coupang"과 "ali" 데이터를 합쳐서 상태로 설정
+              setItems(combinedItems);
               if (combinedItems.length === 0) {
                 console.log("검색 결과가 없습니다.");
               }

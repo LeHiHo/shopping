@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ProductsSearchAction } from "@/app/main/action";
-import { promises } from "dns";
 
 const LoginPage = () => {
   const [keyword, setKeyword] = useState<string>("");
@@ -49,25 +48,30 @@ const LoginPage = () => {
         <button type="submit">검색</button>
       </form>
       <div>
-        <div>상품검색결과</div>
-        <div>
-          {items ? (
-            <div>
-              {items.map((item, index) => (
-                <div key={index}>
-                  <div>{item.title}</div>
-                  <p>가격: {item.price}</p>
+        <div className="flex flex-col">
+          <div className="text-lg font-bold mb-4">상품검색결과</div>
+          <div className="flex flex-wrap">
+            {items ? (
+              items.map((item, index) => (
+                <div
+                  key={index}
+                  className="p-4 m-2 border rounded shadow-lg flex flex-col items-center"
+                >
+                  <div className="font-medium">{item.title}</div>
+                  <p className="text-gray-600">가격: {item.price}</p>
                   <img
                     src={item.image_url}
                     alt={item.title}
-                    style={{ width: "100px", height: "100px" }}
+                    className="w-24 h-24 object-cover mt-2"
                   />
                 </div>
-              ))}
-            </div>
-          ) : (
-            "검색 결과를 기다리는 중..."
-          )}
+              ))
+            ) : (
+              <div className="text-center text-gray-500">
+                검색 결과가 없습니다.
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>

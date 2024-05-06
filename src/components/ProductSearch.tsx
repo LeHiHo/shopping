@@ -41,7 +41,7 @@ const LoginPage = () => {
           // }
         }}
       >
-        <div className="flex">
+        <div className="flex m-20">
           <Input
             type="text"
             placeholder="찾고 싶은 상품을 검색해보세요!"
@@ -52,8 +52,8 @@ const LoginPage = () => {
         </div>
       </form>
       <div>
-        <div className="flex flex-col">
-          <div className="flex flex-wrap">
+        <div className="flex m-20">
+          <div className="grid grid-cols-4 gap-4">
             {items ? (
               items.map((item, index) => (
                 <div

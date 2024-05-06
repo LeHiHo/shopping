@@ -1,3 +1,12 @@
 export default async function Home() {
-  return <div>home</div>;
+  return (
+    <>
+      <div className="bg-blue-500">home</div>
+      <div className="bg-blue-500">home</div>
+      <div className="bg-blue-500">home</div>
+      <div className="bg-blue-500">home</div>
+      <div className="bg-blue-500">home</div>
+      <div className="bg-blue-500">home</div>
+    </>
+  );
 }

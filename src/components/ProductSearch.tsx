@@ -3,6 +3,9 @@
 import { useState } from "react";
 // import { useRouter } from "next/navigation";
 import { ProductsSearchAction } from "@/app/main/action";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Progress } from "./ui/progress";
 
 const LoginPage = () => {
   const [keyword, setKeyword] = useState<string>("");
@@ -38,19 +41,18 @@ const LoginPage = () => {
           // }
         }}
       >
-        <input
-          type="text"
-          placeholder="찾고 싶은 상품을 검색해보세요!"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-        />
-        <button type="submit">검색</button>
+        <div className="flex">
+          <Input
+            type="text"
+            placeholder="찾고 싶은 상품을 검색해보세요!"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+          />
+          <Button type="submit">검색</Button>
+        </div>
       </form>
       <div>
         <div className="flex flex-col">
-          <div className="text-lg font-bold mb-4 text-red-500">
-            상품검색결과
-          </div>
           <div className="flex flex-wrap">
             {items ? (
               items.map((item, index) => (

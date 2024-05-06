@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { ProductsSearchAction } from "@/app/main/action";
 
 const LoginPage = () => {
   const [keyword, setKeyword] = useState<string>("");
-  const router = useRouter();
+  // const router = useRouter();
   const [items, setItems] = useState<ProductSearchResult[]>([]);
 
   return (
@@ -32,7 +32,6 @@ const LoginPage = () => {
             console.error("서버 액션 오류", error);
             setItems([]); // 오류 발생 시 상태 초기화
           }
-
           // alert(result?.message);
           // if (result?.redirectUri) {
           //   router.push(result.redirectUri);
@@ -49,7 +48,9 @@ const LoginPage = () => {
       </form>
       <div>
         <div className="flex flex-col">
-          <div className="text-lg font-bold mb-4">상품검색결과</div>
+          <div className="text-lg font-bold mb-4 text-red-500">
+            상품검색결과
+          </div>
           <div className="flex flex-wrap">
             {items ? (
               items.map((item, index) => (

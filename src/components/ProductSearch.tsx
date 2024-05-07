@@ -6,6 +6,7 @@ import { ProductsSearchAction } from "@/app/main/action";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Progress } from "./ui/progress";
+import { Badge } from "./ui/badge";
 
 const LoginPage = () => {
   const [keyword, setKeyword] = useState<string>("");
@@ -25,6 +26,7 @@ const LoginPage = () => {
               }
               if (result.data.ali) {
                 combinedItems = combinedItems.concat(result.data.ali);
+                console.log(combinedItems);
               }
               setItems(combinedItems);
               if (combinedItems.length === 0) {
@@ -52,21 +54,21 @@ const LoginPage = () => {
         </div>
       </form>
       <div>
-        <div className="flex m-20">
-          <div className="grid grid-cols-4 gap-4">
+        <div className="flex m-20b justify-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {items ? (
               items.map((item, index) => (
-                <div
-                  key={index}
-                  className="p-4 m-2 border rounded shadow-lg flex flex-col items-center"
-                >
-                  <div className="font-medium">{item.title}</div>
-                  <p className="text-gray-600">가격: {item.price}</p>
+                <div key={index} className="flex flex-col items-center m-5">
                   <img
                     src={item.image_url}
                     alt={item.title}
-                    className="w-24 h-24 object-cover mt-2"
+                    className="w-40 h-40 object-cover mt-2"
                   />
+                  <div className="w-40 h-40 items-left">
+                    <Badge>{item.site}</Badge>
+                    <div className="font-medium">{item.title}</div>
+                    <strong className="text-gray-600">{item.price}원</strong>
+                  </div>
                 </div>
               ))
             ) : (

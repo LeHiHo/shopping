@@ -1,4 +1,5 @@
 interface ProductSearchResult {
+  site: string;
   title: string;
   price: string;
   image_url: string;

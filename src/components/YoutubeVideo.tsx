@@ -1,45 +1,30 @@
-import axios from 'axios';
+// YoutubeVideo.tsx
 import { useEffect, useState } from 'react';
+import { fetchVideo } from '@/api/Youtube';
 
 interface Props {
   videoId: string;
 }
 
 const YoutubeVideo = ({ videoId }: Props) => {
-  console.log(videoId)
-  const [video, setVideo] = useState<Youtube | null>(null);
+  const [video, setVideo] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchVideo = async () => {
-      try {
-        const API_KEY =  process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
-        console.log("api",API_KEY)
-        const url = `https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${API_KEY}&part=snippet,statistics`;
-        console.log(url)
-        const response = await axios.get(url);
-        const videoData = response.data.items[0];
-
-        if (videoData) {
-          setVideo({
-            videoId: videoData.id,
-            title: videoData.snippet.title,
-            description: videoData.snippet.description,
-            publishedAt: videoData.snippet.publishedAt,
-            thumbnailUrl: videoData.snippet.thumbnails.high.url,
-            viewCount: videoData.statistics.viewCount,
-          });
-          setLoading(false);
-        }
-      } catch (err) {
-        console.error('Error fetching video:', err);
+    setLoading(true);
+    fetchVideo(videoId).then(videoData => {
+      if (videoData) {
+        setVideo(videoData);
+        setLoading(false);
+      } else {
         setError('Failed to load video data');
         setLoading(false);
       }
-    };
-
-    fetchVideo();
+    }).catch(err => {
+      setError(err.message);
+      setLoading(false);
+    });
   }, [videoId]);
 
   if (loading) return <p>Loading...</p>;

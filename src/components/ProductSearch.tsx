@@ -8,7 +8,7 @@ import { Input } from "./ui/input";
 import { Progress } from "./ui/progress";
 import { Badge } from "./ui/badge";
 
-const LoginPage = () => {
+const ProductSearch = () => {
   const [keyword, setKeyword] = useState<string>("");
   // const router = useRouter();
   const [items, setItems] = useState<ProductSearchResult[]>([]);
@@ -83,4 +83,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default ProductSearch;

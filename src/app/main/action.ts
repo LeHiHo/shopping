@@ -1,6 +1,6 @@
 "use server";
 
-import { getProducts } from "@/api/fastapi";
+import { getProducts } from "@/api/Scraping";
 
 export async function ProductsSearchAction(keyword: string) {
   if (keyword) {

@@ -26,7 +26,6 @@ const ProductSearch = () => {
               }
               if (result.data.ali) {
                 combinedItems = combinedItems.concat(result.data.ali);
-                console.log(combinedItems);
               }
               setItems(combinedItems);
               if (combinedItems.length === 0) {
